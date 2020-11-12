@@ -337,13 +337,7 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   public String getCarrierSync() {
-    TelephonyManager telMgr = (TelephonyManager) getReactApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-    if (telMgr != null) {
-      return telMgr.getNetworkOperatorName();
-    } else {
-      System.err.println("Unable to get network operator name. TelephonyManager was null");
-      return "unknown";
-    }
+    return "unknown"
   }
   @ReactMethod
   public void getCarrier(Promise p) { p.resolve(getCarrierSync()); }
@@ -822,17 +816,6 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
   @SuppressLint({"HardwareIds", "MissingPermission"})
   @ReactMethod(isBlockingSynchronousMethod = true)
   public String getPhoneNumberSync() {
-    if (getReactApplicationContext() != null &&
-            (getReactApplicationContext().checkCallingOrSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED ||
-                    (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && getReactApplicationContext().checkCallingOrSelfPermission(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED) ||
-                    (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && getReactApplicationContext().checkCallingOrSelfPermission(Manifest.permission.READ_PHONE_NUMBERS) == PackageManager.PERMISSION_GRANTED))) {
-      TelephonyManager telMgr = (TelephonyManager) getReactApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-      if (telMgr != null) {
-        return telMgr.getLine1Number();
-      } else {
-        System.err.println("Unable to getPhoneNumber. TelephonyManager was null");
-      }
-    }
     return "unknown";
   }
   @ReactMethod
