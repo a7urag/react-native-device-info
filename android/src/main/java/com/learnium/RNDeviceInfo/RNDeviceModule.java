@@ -337,7 +337,7 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   public String getCarrierSync() {
-    return "unknown"
+    return "unknown";
   }
   @ReactMethod
   public void getCarrier(Promise p) { p.resolve(getCarrierSync()); }
